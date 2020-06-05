@@ -10,6 +10,8 @@ chooseGraphicNumber = '1'
 deleteGraphicNumber = '2'
 changeGraphicName = 'Change name'
 changeGraphicAbout = 'Change about'
+oldgraphicNumber = 0
+newGraphicNumber = 0
 
 def logIn(driver, password):
     enter_username = driver.find_element_by_css_selector('#__BVID__10')
@@ -21,22 +23,25 @@ def logIn(driver, password):
     sleep(2)
 
 def createGraphic (driver):
+
     WebDriverWait(driver, 10).until(  # Click menu button
         EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
     WebDriverWait(driver, 10).until(  # Click select button in menu
         EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[3]'))).click()
     sleep(1)
     a = driver.find_elements_by_class_name('page-link')
-
     for i in range(len(a) - 2):
         print(i)
-        previousGraphics = driver.find_elements_by_tag_name('tr')
-        print(len(previousGraphics))
+        previousGraphic = driver.find_elements_by_tag_name('tr')
+        global  oldgraphicNumber
+        oldgraphicNumber += len(previousGraphic)
         if i == (len(a) - 3) :
             break
         else:
-            print('a:',len(a))
             a[len(a) - 1].click()
+            sleep(1)
+
+    print('Old', oldgraphicNumber)
     sleep(1)
     xBtn = driver.find_elements_by_class_name('close')
     xBtn[1].click()
@@ -53,15 +58,29 @@ def createGraphic (driver):
     okBtn = driver.find_elements_by_class_name('btn-primary')
     okBtn[1].click()
     sleep(2)
+
     WebDriverWait(driver, 10).until(  # Click menu button
         EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
     WebDriverWait(driver, 10).until(  # Click select button in menu
         EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[3]'))).click()
     sleep(1)
-    currentGraphics = driver.find_elements_by_tag_name('tr')
-    print(len(currentGraphics))
+    a = driver.find_elements_by_class_name('page-link')
+    for i in range(len(a) - 2):
+        print(i)
+        previousGraphic = driver.find_elements_by_tag_name('tr')
+        global newGraphicNumber
+        newGraphicNumber += len(previousGraphic)
+        if i == (len(a) - 3):
+            break
+        else:
+            a[len(a) - 1].click()
+            sleep(1)
+
+    print('New', newGraphicNumber)
+    sleep(1)
     xBtn = driver.find_elements_by_class_name('close')
     xBtn[1].click()
+    assert (oldgraphicNumber < newGraphicNumber), 'Create account failed'
 
 def chooseGraphic (driver):
     WebDriverWait(driver, 10).until(  # Click menu button
