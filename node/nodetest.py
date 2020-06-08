@@ -1,7 +1,8 @@
 import unittest
 from selenium import webdriver
 from time import sleep
-from .AllfunctionsNode import createNode, logIn,deleteNode
+from .testFunctions import createNode ,deleteNode
+from user.allfunctionsUser import logIn
 
 class nodeTest(unittest.TestCase):
     def __init__(self,name):
@@ -14,7 +15,7 @@ class nodeTest(unittest.TestCase):
         self.driver = driver
 
     def runTest(self):
-        logIn(self.driver, '1234567')
+        logIn(self.driver)
         createNode(self.driver)
         deleteNode(self.driver)
         sleep(3)

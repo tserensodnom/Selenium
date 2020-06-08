@@ -1,8 +1,12 @@
 import unittest
 from time import sleep
 from selenium import webdriver
-from .AllFunctionsGraph import createGraphic,logIn
-from .AllFunctionsGraph import deleteGraphic,editGraphic,chooseGraphic,highlight
+from graphic.AllFunctionsGraph import createGraphic
+from graphic.AllFunctionsGraph import deleteGraphic,editGraphic,chooseGraphic,highlight
+import sys
+sys.path.append('Code project1/user/AllfuncionsUser')
+from user.allfunctionsUser import logIn
+
 class graphTest(unittest.TestCase):
 
     def __init__(self,name):
@@ -15,7 +19,7 @@ class graphTest(unittest.TestCase):
         self.driver = driver
 
     def runTest(self):
-        logIn(self.driver,'1234567')
+        logIn(self.driver)
         createGraphic(self.driver)
         #deleteGraphic(self.driver)
         #editGraphic(self.driver)

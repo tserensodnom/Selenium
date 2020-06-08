@@ -13,15 +13,6 @@ changeGraphicAbout = 'Change about'
 oldgraphicNumber = 0
 newGraphicNumber = 0
 
-def logIn(driver, password):
-    enter_username = driver.find_element_by_css_selector('#__BVID__10')
-    enter_username.send_keys('test0')
-    enter_password = driver.find_element_by_xpath('//*[@id="__BVID__12"]')
-    enter_password.send_keys(str(password))
-    sleep(1)
-    driver.find_element_by_xpath('//*[@id="app"]/div/div/div/main/div/div/div[2]/form/div[3]/button[2]').click()
-    sleep(2)
-
 def createGraphic (driver):
 
     WebDriverWait(driver, 10).until(  # Click menu button

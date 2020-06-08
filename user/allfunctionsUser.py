@@ -1,4 +1,13 @@
 from time import sleep
+config = {
+    "username": {
+        "value":"test0",
+        "xpath":"",
+        "clickable":False
+    }, #TODO guitseeh
+    "password": '1234567'
+}
+
 username = 'test0'
 password = '1234567'
 email = 'tserensodnom.t@gmail.com'
@@ -11,9 +20,9 @@ lastnameChange = 'lastnameChange'
 avatarChange = '/home/tserensodnom/Pictures/download (1).png'
 newPassword = '123456789'
 
-def createAccount(driver):
+def createAccount(driver): #TODO xpath iig yalgah
     register = driver.find_element_by_xpath('//*[@id="app"]/div/div/div/main/div/div/div[2]/form/div[3]/button[1]')
-    register.click()
+    register.click() #TODO davtaltand oruulah
     userName = driver.find_element_by_xpath('//*[@id="__BVID__18"]')
     userName.send_keys(username)
     newPassword = driver.find_element_by_xpath('//*[@id="__BVID__20"]')
@@ -60,7 +69,7 @@ def basicInfo(driver):
     accountSetting = driver.find_element_by_link_text('Account Settings')
     accountSetting.click()
     info = driver.find_elements_by_tag_name('input')
-    info[0].clear()
+    info[0].clear() #TODO loop
     info[0].send_keys(usernameChange)
     info[1].clear()
     info[1].send_keys(emailChange)
@@ -93,3 +102,28 @@ def changePassword(driver):
     sleep(2)
     check = driver.find_element_by_class_name('text-success')
     assert (check.text == 'Password has changed'), 'Password change failed'
+
+# TODO engine version 1
+# sequence = [
+#     {
+#         "xpath":"",
+#         "clickable": True
+#     },
+#     {
+#         "xpath":"",
+#         "clickable": False,
+#         "value": "asf"
+#     }
+# ]
+#
+# def engine(driver, sequence):
+#     for elem in sequence:
+#         element = driver.find_element_by_xpath(elem["xpath"])
+#         if elem["clickable"]:
+#             element.click()
+#         else:
+#             element.send_keys(elem["value"])
+
+#
+def engine(driver, sequence):
+    sequence[0]["findElement"]["value"]
