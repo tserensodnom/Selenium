@@ -1,10 +1,10 @@
 import unittest
 from selenium import webdriver
 from time import sleep
-from .testFunctions import createNode ,deleteNode
-from user.allfunctionsUser import logIn
+from .functions import createNode ,deleteNode,addComment,Dependencies,Deadline,changePosition
+from user.functions import logIn
 
-class nodeTest(unittest.TestCase):
+class NodeTest(unittest.TestCase):
     def __init__(self,name):
         super().__init__()
         driver = webdriver.Chrome(
@@ -16,10 +16,14 @@ class nodeTest(unittest.TestCase):
 
     def runTest(self):
         logIn(self.driver)
-        createNode(self.driver)
-        deleteNode(self.driver)
+        #createNode(self.driver)
+        #deleteNode(self.driver)
+        #addComment(self.driver)
+        #Dependencies(self.driver)
+        #Deadline(self.driver)
+        changePosition(self.driver)
         sleep(3)
         self.driver.quit()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

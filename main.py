@@ -1,13 +1,13 @@
 import unittest
-from user.usertest import UserTest
+from user.test import UserTest
 from time import sleep
-from graphic.graphtest import graphTest
-from node.nodetest import nodeTest
+from graphic.test import GraphTest
+from node.test import NodeTest
 
 tests = [
     UserTest,
-    graphTest,
-    nodeTest
+    GraphTest,
+    NodeTest
 ]
 for test in tests:
     testSuite = unittest.TestLoader().loadTestsFromTestCase(test)

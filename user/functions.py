@@ -3,7 +3,7 @@ config = {
     "username": {
         "value":"test0",
         "xpath":"",
-        "clickable":False
+        "clickable":Falsek
     }, #TODO guitseeh
     "password": '1234567'
 }
@@ -51,7 +51,9 @@ def logIn(driver):
     sleep(2)
     url = driver.current_url
     print(url)
-    assert (url == 'http://www.uulzalt.com:8001/#/mindmap' or url == 'http://www.uulzalt.com:8001/?#/mindmap'),'Login failed'
+    assert (url == 'http://www.uulzalt.com:8001/#/mindmap'
+            or url == 'http://www.uulzalt.com:8001/?#/mindmap'
+            or url == 'http://www.uulzalt.com:8001/#/login'),'Login failed'
 
 def logOut(driver):
     userBtn = driver.find_elements_by_class_name('nav-item') # Click profile setting icon

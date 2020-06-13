@@ -10,33 +10,34 @@ chooseGraphicNumber = '1'
 deleteGraphicNumber = '2'
 changeGraphicName = 'Change name'
 changeGraphicAbout = 'Change about'
-oldgraphicNumber = 0
+sum = 0
 newGraphicNumber = 0
 
-def createGraphic (driver):
-
+def graphicNumber (driver):
     WebDriverWait(driver, 10).until(  # Click menu button
         EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
     WebDriverWait(driver, 10).until(  # Click select button in menu
         EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[3]'))).click()
     sleep(1)
-    a = driver.find_elements_by_class_name('page-link')
-    for i in range(len(a) - 2):
-        print(i)
-        previousGraphic = driver.find_elements_by_tag_name('tr')
-        global  oldgraphicNumber
-        oldgraphicNumber += len(previousGraphic)
-        if i == (len(a) - 3) :
+    tabs = driver.find_elements_by_class_name('page-link')
+    sum = 0
+    for i in range(len(tabs) - 2):
+        graphNumber = driver.find_elements_by_tag_name('tr')
+        sum += len(graphNumber)
+        if i == (len(tabs) - 3):
             break
         else:
-            a[len(a) - 1].click()
+            tabs[len(tabs) - 1].click()
             sleep(1)
-
-    print('Old', oldgraphicNumber)
     sleep(1)
     xBtn = driver.find_elements_by_class_name('close')
     xBtn[1].click()
     sleep(1)
+    return sum
+
+def createGraphic (driver):
+    PreviosGraphicNumber = graphicNumber(driver)
+    print('PreviosGraphicNumber',PreviosGraphicNumber)
     WebDriverWait(driver, 10).until(  # Click menu button
         EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
     sleep(1)
@@ -49,29 +50,9 @@ def createGraphic (driver):
     okBtn = driver.find_elements_by_class_name('btn-primary')
     okBtn[1].click()
     sleep(2)
-
-    WebDriverWait(driver, 10).until(  # Click menu button
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
-    WebDriverWait(driver, 10).until(  # Click select button in menu
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[3]'))).click()
-    sleep(1)
-    a = driver.find_elements_by_class_name('page-link')
-    for i in range(len(a) - 2):
-        print(i)
-        previousGraphic = driver.find_elements_by_tag_name('tr')
-        global newGraphicNumber
-        newGraphicNumber += len(previousGraphic)
-        if i == (len(a) - 3):
-            break
-        else:
-            a[len(a) - 1].click()
-            sleep(1)
-
-    print('New', newGraphicNumber)
-    sleep(1)
-    xBtn = driver.find_elements_by_class_name('close')
-    xBtn[1].click()
-    assert (oldgraphicNumber < newGraphicNumber), 'Create account failed'
+    CurrentGraphicNumber = graphicNumber(driver)
+    print('CurrentGraphicNumber',CurrentGraphicNumber)
+    assert (PreviosGraphicNumber < CurrentGraphicNumber), 'Create graphic failed'
 
 def chooseGraphic (driver):
     WebDriverWait(driver, 10).until(  # Click menu button
@@ -80,10 +61,24 @@ def chooseGraphic (driver):
         EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[3]'))).click()
     sleep(1)
     table_id = driver.find_element_by_xpath("//table/tbody/tr[" + str(chooseGraphicNumber) + "]/td[1]")
+    choosedGraph = table_id.text
     table_id.click()
-    sleep(2)
+    sleep(1)
+    actionChains = ActionChains(driver)
+    rigthclickElement = driver.find_elements_by_class_name('badge')
+    actionChains.context_click(rigthclickElement[1]).perform()
+    sleep(1)
+    editGraph = driver.find_element_by_xpath('//*[@id="update"]').click()
+    sleep(1)
+    check = driver.find_elements_by_class_name('form-control')
+    print(choosedGraph)
+    xBtn = driver.find_elements_by_class_name('close')
+    xBtn[1].click()
+    assert (choosedGraph == check[0].get_attribute('value')), 'Choose graphic failed'
 
 def deleteGraphic (driver):
+    PreviosGraphicNumber = graphicNumber(driver)
+    print('PreviosGraphicNumber',PreviosGraphicNumber)
     WebDriverWait(driver, 10).until(  # Click menu button
         EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
     WebDriverWait(driver, 10).until(  # Click select button in menu
@@ -99,6 +94,9 @@ def deleteGraphic (driver):
     xBtn = driver.find_elements_by_class_name('close')
     xBtn[1].click()
     sleep(2)
+    CurrentGraphicNumber = graphicNumber(driver)
+    print('CurrentGraphicNumber', CurrentGraphicNumber)
+    assert (CurrentGraphicNumber < PreviosGraphicNumber), 'Delete graphic failed'
 
 def editGraphic (driver):
     actionChains = ActionChains(driver)
@@ -207,3 +205,16 @@ def highlight (driver):
     sleep(2)
     okBtn = driver.find_elements_by_class_name('btn-primary')
     okBtn[1].click()
+
+def searchButton (driver):
+    sBtn = driver.find_element_by_class_name('vs__selected-options')
+    sBtn.click()
+    sleep(2)
+    allText = driver.find_element_by_class_name('vs__dropdown-menu')
+    searchText = allText.text
+    searchText = searchText.split('\n')
+    sField = driver.find_element_by_tag_name('input')
+    sField.send_keys(searchText[1])
+    sleep(2)
+    allText = driver.find_element_by_class_name('vs__dropdown-menu')
+    allText.click()

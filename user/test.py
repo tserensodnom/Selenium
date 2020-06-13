@@ -1,8 +1,8 @@
 import unittest
 from time import sleep
 from selenium import webdriver
-from .allfunctionsUser import createAccount, logIn
-from .allfunctionsUser import logOut, basicInfo, changePassword
+from .functions import createAccount, logIn
+from .functions import logOut, basicInfo, changePassword
 
 
 sequence = [ #TODO change procedure order
@@ -10,7 +10,6 @@ sequence = [ #TODO change procedure order
     "logOut",
     "logIn",
     "logOut",
-
 ]
 
 
@@ -42,7 +41,6 @@ class UserTest(unittest.TestCase):
     #         getattr(self, elem)(self.driver) #TODO Dynamic Programming zuvhun functionuud usertestiinh bhad ahiglaj boloh bsn
     #         if elem == "logIn":
     #             logIn(self.driver)
-
 
 if __name__ == "__main__":
     unittest.main()
