@@ -1,12 +1,7 @@
 from time import sleep
-config = {
-    "username": {
-        "value":"test0",
-        "xpath":"",
-        "clickable":Falsek
-    }, #TODO guitseeh
-    "password": '1234567'
-}
+from .config
+import json
+import os
 
 username = 'test0'
 password = '1234567'
@@ -21,23 +16,32 @@ avatarChange = '/home/tserensodnom/Pictures/download (1).png'
 newPassword = '123456789'
 
 def createAccount(driver): #TODO xpath iig yalgah
-    register = driver.find_element_by_xpath('//*[@id="app"]/div/div/div/main/div/div/div[2]/form/div[3]/button[1]')
-    register.click() #TODO davtaltand oruulah
-    userName = driver.find_element_by_xpath('//*[@id="__BVID__18"]')
-    userName.send_keys(username)
-    newPassword = driver.find_element_by_xpath('//*[@id="__BVID__20"]')
-    newPassword.send_keys(password)
-    passVerification = driver.find_element_by_xpath('//*[@id="__BVID__22"]')
-    passVerification.send_keys(password)
-    enterEmail = driver.find_element_by_xpath('//*[@id="__BVID__24"]')
-    enterEmail.send_keys(email)
-    firstName = driver.find_element_by_xpath('//*[@id="__BVID__26"]')
-    firstName.send_keys(firstname)
-    lastName = driver.find_element_by_xpath('//*[@id="__BVID__28"]')
-    lastName.send_keys(lastname)
-    sleep(1)
-    driver.find_element_by_xpath('//*[@id="__BVID__13___BV_modal_footer_"]/button[2]').click()
-    sleep(2)
+    # register = driver.find_element_by_xpath('//*[@id="app"]/div/div/div/main/div/div/div[2]/form/div[3]/button[1]')
+    # register.click() #TODO davtaltand oruulah
+    # userName = driver.find_element_by_xpath('//*[@id="__BVID__18"]')
+    # userName.send_keys(username)
+    # newPassword = driver.find_element_by_xpath('//*[@id="__BVID__20"]')
+    # newPassword.send_keys(password)
+    # passVerification = driver.find_element_by_xpath('//*[@id="__BVID__22"]')
+    # passVerification.send_keys(password)
+    # enterEmail = driver.find_element_by_xpath('//*[@id="__BVID__24"]')
+    # enterEmail.send_keys(email)
+    # firstName = driver.find_element_by_xpath('//*[@id="__BVID__26"]')
+    # firstName.send_keys(firstname)
+    # lastName = driver.find_element_by_xpath('//*[@id="__BVID__28"]')
+    # lastName.send_keys(lastname)
+    # sleep(1)
+    # driver.find_element_by_xpath('//*[@id="__BVID__13___BV_modal_footer_"]/button[2]').click()
+    # sleep(2)
+    with open('config.json') as f:
+        data = json.load(f)
+    for state in data['states']:
+        if state['clickable'] == True:
+            elem = driver.find_element_by_xpath(state['xpath'])
+            elem.click()
+        else:
+            elem = driver.find_element_by_xpath(state['xpath'])
+            elem.send_keys(state['value'])
     login = driver.find_element_by_xpath('//*[@id="app"]/div/div/div/main/div/div/div[1]/div/strong')
     assert(login.text == 'Login'), 'Create account failed'
 

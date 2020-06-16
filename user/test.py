@@ -4,12 +4,15 @@ from selenium import webdriver
 from .functions import createAccount, logIn
 from .functions import logOut, basicInfo, changePassword
 
-
 sequence = [ #TODO change procedure order
+    "createAccount",
     "logIn",
     "logOut",
     "logIn",
+    "basicInfo",
+    "changePassword",
     "logOut",
+    "logIn",
 ]
 
 
@@ -26,17 +29,31 @@ class UserTest(unittest.TestCase):
 
     def runTest(self):
         # createAccount(self.driver)
-        logIn(self.driver)
-        logOut(self.driver)
-        logIn(self.driver)
-        basicInfo(self.driver)
-        changePassword(self.driver)
-        logOut(self.driver)
-        logIn(self.driver)
+        # logIn(self.driver)
+        # logOut(self.driver)
+        # logIn(self.driver)
+        # basicInfo(self.driver)
+        # changePassword(self.driver)
+        # logOut(self.driver)
+        # logIn(self.driver)
+        for elem in sequence:
+            #getattr(self,elem)(self.driver)
+            print(elem)
+            #elem(self.driver)
+            if elem == "logIn":
+             logIn(self.driver)
+            elif elem == "createAccount":
+                createAccount(self.driver)
+            elif elem == "logOut":
+                logOut(self.driver)
+            elif elem == "basicInfo":
+                basicInfo(self.driver)
+            elif elem == "changePassword":
+                changePassword(self.driver)
         sleep(3)
         self.driver.quit()
 
-    # def _runTest(self): #array of string
+# def _runTest(self): #array of string
     #     for elem in sequence:
     #         getattr(self, elem)(self.driver) #TODO Dynamic Programming zuvhun functionuud usertestiinh bhad ahiglaj boloh bsn
     #         if elem == "logIn":

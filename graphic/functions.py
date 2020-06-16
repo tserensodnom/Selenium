@@ -218,3 +218,10 @@ def searchButton (driver):
     sleep(2)
     allText = driver.find_element_by_class_name('vs__dropdown-menu')
     allText.click()
+    checkElem = driver.find_element_by_class_name('bg-primary')
+    # choosedText = checkElem.text
+    # print(checkElem.text)
+    # print(searchText[1])
+    # sleep(5)
+    # #assert (searchText[1] == checkElem.text), 'Search button failed'
+    # sleep(1)

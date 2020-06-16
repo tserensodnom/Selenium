@@ -6,8 +6,8 @@ from node.test import NodeTest
 
 tests = [
     UserTest,
-    GraphTest,
-    NodeTest
+    # GraphTest,
+    # NodeTest
 ]
 for test in tests:
     testSuite = unittest.TestLoader().loadTestsFromTestCase(test)
