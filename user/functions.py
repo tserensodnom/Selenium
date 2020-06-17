@@ -1,7 +1,5 @@
 from time import sleep
-from .config
 import json
-import os
 
 username = 'test0'
 password = '1234567'
@@ -16,29 +14,15 @@ avatarChange = '/home/tserensodnom/Pictures/download (1).png'
 newPassword = '123456789'
 
 def createAccount(driver): #TODO xpath iig yalgah
-    # register = driver.find_element_by_xpath('//*[@id="app"]/div/div/div/main/div/div/div[2]/form/div[3]/button[1]')
-    # register.click() #TODO davtaltand oruulah
-    # userName = driver.find_element_by_xpath('//*[@id="__BVID__18"]')
-    # userName.send_keys(username)
-    # newPassword = driver.find_element_by_xpath('//*[@id="__BVID__20"]')
-    # newPassword.send_keys(password)
-    # passVerification = driver.find_element_by_xpath('//*[@id="__BVID__22"]')
-    # passVerification.send_keys(password)
-    # enterEmail = driver.find_element_by_xpath('//*[@id="__BVID__24"]')
-    # enterEmail.send_keys(email)
-    # firstName = driver.find_element_by_xpath('//*[@id="__BVID__26"]')
-    # firstName.send_keys(firstname)
-    # lastName = driver.find_element_by_xpath('//*[@id="__BVID__28"]')
-    # lastName.send_keys(lastname)
-    # sleep(1)
-    # driver.find_element_by_xpath('//*[@id="__BVID__13___BV_modal_footer_"]/button[2]').click()
-    # sleep(2)
-    with open('config.json') as f:
+    with open(r'/home/tserensodnom/Desktop/Uulzal project/Code project1/user/config.json') as f:
         data = json.load(f)
-    for state in data['states']:
+    for state in data['create']:
+        print(state['value'])
+        sleep(1)
         if state['clickable'] == True:
             elem = driver.find_element_by_xpath(state['xpath'])
             elem.click()
+            sleep(1)
         else:
             elem = driver.find_element_by_xpath(state['xpath'])
             elem.send_keys(state['value'])
@@ -54,17 +38,29 @@ def logIn(driver):
     driver.find_element_by_xpath('//*[@id="app"]/div/div/div/main/div/div/div[2]/form/div[3]/button[2]').click()
     sleep(2)
     url = driver.current_url
-    print(url)
     assert (url == 'http://www.uulzalt.com:8001/#/mindmap'
             or url == 'http://www.uulzalt.com:8001/?#/mindmap'
             or url == 'http://www.uulzalt.com:8001/#/login'),'Login failed'
 
 def logOut(driver):
-    userBtn = driver.find_elements_by_class_name('nav-item') # Click profile setting icon
-    userBtn[0].click()
-    sleep(1)
-    driver.find_element_by_link_text('Logout').click()  # Click Logout
-    sleep(2)
+    # userBtn = driver.find_elements_by_class_name('nav-item') # Click profile setting icon
+    # userBtn[0].click()
+    # sleep(1)
+    # driver.find_element_by_link_text('Logout').click()  # Click Logout
+    # sleep(2)
+    with open(r'/home/tserensodnom/Desktop/Uulzal project/Code project1/user/config.json') as f:
+        data = json.load(f)
+    for state in data['logout']:
+        if state['first'] == True:
+            elem = driver.find_elements_by_class_name(state['method'])
+            print(state['method'])
+            elem[0].click()
+            sleep(1)
+        else:
+            elem = driver.\
+                find_element_by_link_text(state['method'])
+            elem.click()
+            sleep(2)
     url = driver.current_url
     assert (url == 'http://www.uulzalt.com:8001/#/login' or url == 'http://www.uulzalt.com:8001/?#/login' ), 'Logout failed'
 
