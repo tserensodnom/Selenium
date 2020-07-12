@@ -1,0 +1,101 @@
+{
+  "create_graphic": [
+    {
+      "path": "/html/body/div/div/div/div/main/div/div/button",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    },
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/div/div/form/div[1]/div/input",
+      "value": "ICVYe",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/div/div/form/div[3]/div/textarea",
+      "value": "kqcxA",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/footer/button[2]",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ],
+  "choose_graphic": [
+    {
+      "path": "/html/body/div/div/div/div/main/div/div/div[1]/div/div[1]/button/button",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    },
+    {
+      "path": "/html/body/div/div/div/div/main/div/div/div[1]/div/div[1]/ul/div/div/div[2]/section[1]/form/div/div/div/table/tbody/tr[2]",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ],
+  "delete_graphic": [
+    {
+      "path": "/html/body/div/div/div/div/main/div/div/div[1]/div/div[1]/button/button",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    },
+    {
+      "path": "/html/body/div/div/div/div/main/div/div/div[1]/div/div[1]/ul/div/div/div[2]/section[1]/form/div/div/div/table/tbody/tr[1]/td[4]/button",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    },
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/footer/button[2]",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ],
+  "edit_graphic": [
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/div/div/form/div[1]/div/input",
+      "value": "Change name",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/div/div/form/div[3]/div/textarea",
+      "value": "Change about",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/footer/button[2]",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ],
+  "search_button": [
+    {
+      "path": "/html/body/div/div/div/div/main/div/div/div[1]/div/div[2]/div/div[1]/div/div[2]/span/i",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ],
+  "hightlight": [
+    {
+      "value": [
+        "Not-started",
+        "In-progress",
+        "Done",
+        "Verified",
+        "None"
+      ]
+    }
+  ]
+}

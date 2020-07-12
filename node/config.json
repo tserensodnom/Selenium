@@ -1,0 +1,104 @@
+{
+  "create_node": [
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/div/div/div/form[1]/div[1]/div/input",
+      "value": "new node",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/div/div/div/form[1]/div[2]/div/input",
+      "value": "10/10/2020",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/div/div/div/form[1]/div[3]/div/input",
+      "value": "10/10/2021",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/div/div/div/form[1]/div[4]/div/textarea",
+      "value": "Detailed node",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": null,
+      "value": "Division",
+      "clickable": null,
+      "filled": null
+    },
+    {
+      "path": null,
+      "value": "Halted",
+      "clickable": null,
+      "filled": null
+    },
+    {
+      "path": null,
+      "value": "High",
+      "clickable": null,
+      "filled": null
+    }
+  ],
+  "delete_node": [
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/footer/button[2]",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ],
+  "add_comment": [
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/div/div/div[2]/div/form/textarea",
+      "value": "Test comment",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/div/div/div[2]/div/form/form/button",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ],
+  "dependencies": [
+    {
+      "path": null,
+      "value": null,
+      "clickable": null,
+      "filled": null
+    }
+  ],
+  "change_position": [
+    {
+      "xoffset": "10",
+      "yoffset": "5"
+    }
+  ],
+  "deadline": [
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/div/div/div/form[1]/div[2]/div/input",
+      "value": "10/10/2020",
+      "value1": "2020-10-10",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/div/div/div/form[1]/div[3]/div/input",
+      "value": "10/10/2021",
+      "value1": "2021-10-10",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div[2]/div[1]/div/div/footer/button[2]",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ]
+}

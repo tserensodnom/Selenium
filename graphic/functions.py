@@ -1,227 +1,96 @@
 from time import sleep
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.webdriver import ActionChains
+from utils.functions import engine, edit
 
-newGraphicName = 'New graph 1'
-aboutText = 'dkghkj jgkljglkhag  kjlhgklah jklgjlka j'
-chooseGraphicNumber = '1'
-deleteGraphicNumber = '2'
-changeGraphicName = 'Change name'
-changeGraphicAbout = 'Change about'
-sum = 0
-newGraphicNumber = 0
 
-def graphicNumber (driver):
-    WebDriverWait(driver, 10).until(  # Click menu button
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
-    WebDriverWait(driver, 10).until(  # Click select button in menu
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[3]'))).click()
-    sleep(1)
-    tabs = driver.find_elements_by_class_name('page-link')
-    sum = 0
-    for i in range(len(tabs) - 2):
-        graphNumber = driver.find_elements_by_tag_name('tr')
-        sum += len(graphNumber)
-        if i == (len(tabs) - 3):
-            break
-        else:
-            tabs[len(tabs) - 1].click()
-            sleep(1)
-    sleep(1)
-    xBtn = driver.find_elements_by_class_name('close')
-    xBtn[1].click()
-    sleep(1)
+def graphicNumber(driver):
+    table = driver.find_element_by_tag_name('table')
+    sum = table.get_attribute('aria-rowcount')  # TODO aria-rowcountF Shalgah
+    print(sum)
     return sum
 
-def createGraphic (driver):
-    PreviosGraphicNumber = graphicNumber(driver)
-    print('PreviosGraphicNumber',PreviosGraphicNumber)
-    WebDriverWait(driver, 10).until(  # Click menu button
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
-    sleep(1)
-    WebDriverWait(driver, 10).until(  # Click create graph button in menu
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[2]'))).click()
-    sleep(1)
-    driver.find_element_by_xpath('//*[@id="basicName"]').send_keys(newGraphicName)
-    driver.find_element_by_id('basicTextarea').send_keys(aboutText)
-    sleep(1)
-    okBtn = driver.find_elements_by_class_name('btn-primary')
-    okBtn[1].click()
-    sleep(2)
-    CurrentGraphicNumber = graphicNumber(driver)
-    print('CurrentGraphicNumber',CurrentGraphicNumber)
-    assert (PreviosGraphicNumber < CurrentGraphicNumber), 'Create graphic failed'
 
-def chooseGraphic (driver):
-    WebDriverWait(driver, 10).until(  # Click menu button
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
-    WebDriverWait(driver, 10).until(  # Click select button in menu
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[3]'))).click()
-    sleep(1)
-    table_id = driver.find_element_by_xpath("//table/tbody/tr[" + str(chooseGraphicNumber) + "]/td[1]")
-    choosedGraph = table_id.text
-    table_id.click()
-    sleep(1)
-    actionChains = ActionChains(driver)
-    rigthclickElement = driver.find_elements_by_class_name('badge')
-    actionChains.context_click(rigthclickElement[1]).perform()
-    sleep(1)
-    editGraph = driver.find_element_by_xpath('//*[@id="update"]').click()
-    sleep(1)
-    check = driver.find_elements_by_class_name('form-control')
-    print(choosedGraph)
-    xBtn = driver.find_elements_by_class_name('close')
-    xBtn[1].click()
-    assert (choosedGraph == check[0].get_attribute('value')), 'Choose graphic failed'
+def createGraphic(driver, data):
+    pre = graphicNumber(driver)
+    engine(driver, data)
+    cur = graphicNumber(driver)
+    # assert (pre < cur), 'Create graphic failed'
 
-def deleteGraphic (driver):
-    PreviosGraphicNumber = graphicNumber(driver)
-    print('PreviosGraphicNumber',PreviosGraphicNumber)
-    WebDriverWait(driver, 10).until(  # Click menu button
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
-    WebDriverWait(driver, 10).until(  # Click select button in menu
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[3]'))).click()
-    sleep(1)
-    deleteButton = driver.find_element_by_xpath(
-        '/html/body/div[3]/div[1]/div/div/div/form/div/div/div/table/tbody/tr[' + str(deleteGraphicNumber) + ']/td[4]/button')
-    deleteButton.click()
-    sleep(2)
-    okBtn = driver.find_elements_by_class_name('btn-primary')
-    okBtn[2].click()
-    sleep(1)
-    xBtn = driver.find_elements_by_class_name('close')
-    xBtn[1].click()
-    sleep(2)
-    CurrentGraphicNumber = graphicNumber(driver)
-    print('CurrentGraphicNumber', CurrentGraphicNumber)
-    assert (CurrentGraphicNumber < PreviosGraphicNumber), 'Delete graphic failed'
 
-def editGraphic (driver):
-    actionChains = ActionChains(driver)
-    rigthclickElement = driver.find_elements_by_class_name('badge')
-    actionChains.context_click(rigthclickElement[1]).perform()
+def chooseGraphic(driver, data):
+    engine(driver, data)
+    # driver.find_element_by_xpath('/html/body/div/div/div/div/main/div/div/div[1]/div/div[1]/button/button').click()
+    # el = driver.find_element_by_xpath('/html/body/div/div/div/div/main/div/div/div[1]/div/div[1]/ul/div/div/div[2]/section[1]/form/div/div/div/table/tbody/tr[2]')
+    # el.click()
     sleep(1)
-    editGraph = driver.find_element_by_xpath('//*[@id="update"]').click()
-    sleep(1)
-    editTitle = driver.find_element_by_class_name('form-control')
-    editTitle.clear()
-    editTitle.send_keys(changeGraphicName)
-    editAbout = driver.find_element_by_id('basicTextarea')
-    editAbout.clear()
-    editAbout.send_keys(changeGraphicAbout)
-    sleep(1)
-    okBtn = driver.find_elements_by_class_name('btn-primary')
-    okBtn[1].click()
-    sleep(2)
+    # WebDriverWait(driver, 10).until(  # Click menu button
+    #     EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
+    # WebDriverWait(driver, 10).until(  # Click select button in menu
+    #     EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[3]'))).click()
+    # sleep(1)
+    # table_id = driver.find_element_by_xpath("//table/tbody/tr[" + str(chooseGraphicNumber) + "]/td[1]")
+    # choosedGraph = table_id.text
+    # table_id.click()
+    # sleep(1)
+    # actionChains = ActionChains(driver)
+    # rigthclickElement = driver.find_elements_by_class_name('badge')
+    # actionChains.context_click(rigthclickElement[1]).perform()
+    # sleep(1)
+    # editGraph = driver.find_element_by_xpath('//*[@id="update"]').click()
+    # sleep(1)
+    # check = driver.find_elements_by_class_name('form-control')
+    # print(choosedGraph)
+    # xBtn = driver.find_elements_by_class_name('close')
+    # xBtn[1].click()
+    # assert (choosedGraph == check[0].get_attribute('value')), 'Choose graphic failed'
 
-def highlight (driver):
-    # Done option
-    WebDriverWait(driver, 10).until(  # Click menu button
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
-    sleep(1)
-    WebDriverWait(driver, 10).until(  # Click highlight button in menu
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[1]'))).click()
-    sleep(1)
-    select = driver.find_element_by_id('basicSelect')
-    select.click()
-    for option in select.find_elements_by_tag_name('option'):
-        if option.text == 'Done':  # Operation Done
-            option.click()  # select() in earlier versions of webdriver
-            break
-    sleep(2)
-    okBtn = driver.find_elements_by_class_name('btn-primary')
-    okBtn[1].click()
-    sleep(2)
 
-    # In-progress option
-    WebDriverWait(driver, 10).until(  # Click menu button
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
-    sleep(1)
-    WebDriverWait(driver, 10).until(  # Click highlight button in menu
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[1]'))).click()
-    sleep(1)
-    select = driver.find_element_by_id('basicSelect')
-    select.click()
-    for option in select.find_elements_by_tag_name('option'):
-        if option.text == 'In-progress':
-            option.click()  # select() in earlier versions of webdriver
-            break
-    sleep(2)
-    okBtn = driver.find_elements_by_class_name('btn-primary')
-    okBtn[1].click()
-    sleep(2)
+def deleteGraphic(driver, data):
+    pre = graphicNumber(driver)
+    engine(driver, data)
+    cur = graphicNumber(driver)
+    # assert (pre > cur), 'Delete graphic failed'
 
-    # Not-started option
-    WebDriverWait(driver, 10).until(  # Click menu button
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
-    sleep(1)
-    WebDriverWait(driver, 10).until(  # Click highlight button in menu
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[1]'))).click()
-    sleep(1)
-    select = driver.find_element_by_id('basicSelect')
-    select.click()
-    for option in select.find_elements_by_tag_name('option'):
-        if option.text == 'Not-started':  # operation Done
-            option.click()  # select() in earlier versions of webdriver
-            break
-    sleep(2)
-    okBtn = driver.find_elements_by_class_name('btn-primary')
-    okBtn[1].click()
-    sleep(2)
 
-    # Verified option
-    WebDriverWait(driver, 10).until(  # Click menu button
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
+def editGraphic(driver, data):
+    edit(driver, x='edit', i=0)
+    engine(driver, data)
+    edit(driver, x='edit', i=0)
+    nameCheck = driver.find_element_by_xpath('/html/body/div[2]/div[1]/div/div/div/div/form/div[1]/div/input')
+    aboutCheck = driver.find_element_by_xpath('/html/body/div[2]/div[1]/div/div/div/div/form/div[3]/div/textarea')
     sleep(1)
-    WebDriverWait(driver, 10).until(  # Click hightlight button in menu
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[1]'))).click()
-    sleep(1)
-    select = driver.find_element_by_id('basicSelect')
-    select.click()
-    for option in select.find_elements_by_tag_name('option'):
-        if option.text == 'Verified':  # operation Done
-            option.click()  # select() in earlier versions of webdriver
-            break
-    sleep(2)
-    okBtn = driver.find_elements_by_class_name('btn-primary')
-    okBtn[1].click()
-    sleep(1)
+    xbtn = driver.find_element_by_xpath('/html/body/div[2]/div[1]/div/div/footer/button[1]')
+    xbtn.click()
+    assert (nameCheck.get_attribute('value') == data[0]['value'] and
+            aboutCheck.get_attribute('value') == data[1]['value']), 'Failed edit graphic'
 
-    # None option
-    WebDriverWait(driver, 10).until(  # Click menu button
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-wrapper"]'))).click()
-    sleep(1)
-    WebDriverWait(driver, 10).until(  # Click highlight button in menu
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="bottom-right-action"]/ul/li[1]'))).click()
-    sleep(1)
-    select = driver.find_element_by_id('basicSelect')
-    select.click()
-    for option in select.find_elements_by_tag_name('option'):
-        if option.text == 'None':
-            option.click()  # select() in earlier versions of webdriver
-            break
-    sleep(2)
-    okBtn = driver.find_elements_by_class_name('btn-primary')
-    okBtn[1].click()
 
-def searchButton (driver):
-    sBtn = driver.find_element_by_class_name('vs__selected-options')
-    sBtn.click()
-    sleep(2)
+def highlight(driver, data):
+    for elem in data[0]['value']:
+        clickBtn = driver.find_element_by_xpath(
+            '/html/body/div/div/div/div/main/div/div/div[1]/div/div[2]/div/div[2]/button/button')
+        clickBtn.click()
+        sleep(1)
+        select = driver.find_element_by_id('basicSelect')
+        select.click()
+        sleep(1)
+        for option in select.find_elements_by_tag_name('option'):
+            if option.text == elem:  # Operation Done
+                option.click()  # select() in earlier versions of webdriver
+                sleep(1)
+                break
+        sleep(1)
+
+
+def searchButton(driver, data):
+    engine(driver, data)
     allText = driver.find_element_by_class_name('vs__dropdown-menu')
     searchText = allText.text
     searchText = searchText.split('\n')
-    sField = driver.find_element_by_tag_name('input')
-    sField.send_keys(searchText[1])
-    sleep(2)
+    searchText = searchText[0].split(' ')
+    sField = driver.find_element_by_xpath(
+        '/html/body/div/div/div/div/main/div/div/div[1]/div/div[2]/div/div[1]/div/div[1]/input')
+    sField.send_keys(searchText[0])
     allText = driver.find_element_by_class_name('vs__dropdown-menu')
     allText.click()
     checkElem = driver.find_element_by_class_name('bg-primary')
-    # choosedText = checkElem.text
-    # print(checkElem.text)
-    # print(searchText[1])
-    # sleep(5)
-    # #assert (searchText[1] == checkElem.text), 'Search button failed'
-    # sleep(1)
+    assert (checkElem.value_of_css_property('background-color') == 'rgba(32, 168, 216, 1)'), 'Search button failed'

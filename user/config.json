@@ -1,54 +1,166 @@
 {
   "create": [
-    {
+     {
+      "path": "/html/body/div[1]/form/p[1]/a",
       "value": null,
-      "xpath": "//*[@id='app']/div/div/div/main/div/div/div[2]/form/div[3]/button[1]",
-      "clickable": true
-    },
+      "clickable": true,
+      "filled": false
+     },
     {
-      "value": "test0",
-      "xpath": "//*[@id='__BVID__18']",
-      "clickable": false
-    },
-    {
-      "value": "1234567",
-      "xpath": "//*[@id='__BVID__20']",
-      "clickable": false
-    },
-    {
-      "value": "1234567",
-      "xpath": "//*[@id='__BVID__22']",
-      "clickable": false
-    },
-    {
+      "path": "/html/body/div/form/div[2]/input",
       "value": "tserensodnom.t@gmail.com",
-      "xpath": "//*[@id='__BVID__24']",
-      "clickable": false
+      "clickable": false,
+      "filled": true
     },
     {
-      "value": "Firstname",
-      "xpath": "//*[@id='__BVID__26']",
-      "clickable": false
+      "path": "/html/body/div/form/div[5]/input",
+      "value": "mongol1234",
+      "clickable": false,
+      "filled": true
+    },
+     {
+      "path": "/html/body/div/form/div[6]/input",
+      "value": "mongol1234",
+      "clickable": false,
+      "filled": true
     },
     {
-        "value": "Lastname",
-        "xpath": "//*[@id='__BVID__28']",
-        "clickable": false
+      "path": "/html/body/div/form/div[7]/button",
+      "value": null,
+      "clickable": true,
+      "filled": false
     },
     {
-        "value": "",
-        "xpath": "//*[@id='__BVID__13___BV_modal_footer_']/button[2]",
-        "clickable": true
+      "path": "/html/body/div/form/p[1]/a",
+      "value": null,
+      "clickable": true,
+      "filled": false
     }
   ],
-  "logout": [
+  "login": [
     {
-      "method": "nav-item",
-      "first": true
+      "path": "//*[@id=\"email\"]",
+      "value": "tserensodnom.t@gmail.com",
+      "clickable": false,
+      "filled": true
     },
     {
-      "method": "Logout",
-      "first": false
+      "path": "//*[@id=\"password\"]",
+      "value": "mongol1234",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div[1]/form/div[3]/button",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ],
+  "logOut": [
+    {
+      "path": "//*[@id=\"sidebar\"]/div[2]/div[2]/button",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    },
+    {
+      "path": "//*[@id=\"app\"]/div/div/div/main/div/div/button",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ],
+  "basic_info": [
+    {
+      "path": "//*[@id=\"sidebar\"]/nav/section/ul/li[6]/a",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    },
+    {
+      "path": "/html/body/div/div/div/div/main/div/div[1]/div[2]/form/div[1]/div/input\n",
+      "value": "tserensodnom.t@gmail.com",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div/div/div/div/main/div/div[1]/div[2]/form/div[2]/div/input",
+      "value": "tserensodnom.t@gmail.com",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div/div/div/div/main/div/div[1]/div[2]/form/div[3]/div/input",
+      "value": "Firstname",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div/div/div/div/main/div/div[1]/div[2]/form/div[4]/div/input",
+      "value": "Lastname",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div/div/div/div/main/div/div[1]/div[2]/form/div[5]/div/div/input",
+      "value": "/home/tserensodnom/Pictures/download (1).png",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div/div/div/div/main/div/div[1]/div[2]/form/div[6]/button",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ],
+  "change_password": [
+    {
+      "path": "/html/body/div/div/div/div/main/div/div[2]/div[2]/form/div[1]/div/input",
+      "value": "mongol1234",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div/div/div/div/main/div/div[2]/div[2]/form/div[2]/div/input",
+      "value": "mongol12345",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div/div/div/div/main/div/div[2]/div[2]/form/div[3]/div/input",
+      "value": "mongol12345",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div/div/div/div/main/div/div[2]/div[2]/form/div[4]/button",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ],
+  "create_company": [
+    {
+      "path": "/html/body/div/div/div/div/main/div/div[3]/div[2]/form/div[1]/div/input",
+      "value": "tMFFx",
+      "clickable": false,
+      "filled": true
+    },
+    {
+      "path": "/html/body/div/div/div/div/main/div/div[3]/div[2]/form/div[2]/button",
+      "value": null,
+      "clickable": true,
+      "filled": false
+    }
+  ],
+  "back_to_home": [
+    {
+      "path": "/html/body/div/div/div/div/div/nav/section/ul/li[2]/a",
+      "value": null,
+      "clickable": true,
+      "filled": false
     }
   ]
 }
